@@ -1,5 +1,5 @@
-#include "components/message_queue/msg.h"
-#include "components/message_queue/msg_queue.h"
+#include "components/msg_queue/msg.h"
+#include "components/msg_queue/msg_queue.h"
 #include "thirdparty/glog/logging.h"
 #include "thirdparty/gtest/gtest.h"
 

@@ -1,4 +1,4 @@
-#include "components/message_queue/msg.h"
+#include "components/msg_queue/msg.h"
 #include <atomic>
 
 namespace {

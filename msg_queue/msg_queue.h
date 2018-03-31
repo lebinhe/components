@@ -1,7 +1,7 @@
 #ifndef COMPONENTS_MESSAGE_QUEUE_MSG_QUEUE_H_
 #define COMPONENTS_MESSAGE_QUEUE_MSG_QUEUE_H_
 
-#include "components/message_queue/msg.h"
+#include "components/msg_queue/msg.h"
 #include <memory>
 
 // Msg ID for timeout message 
