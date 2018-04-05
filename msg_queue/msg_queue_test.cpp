@@ -159,3 +159,52 @@ TEST(MsgQueue, RequestResponse) {
     t3.join();
 }
 
+TEST(MsgQueue, InClass) {
+
+struct M {
+    int a;
+    std::string s;
+
+    M(int pa, std::string ps) : a(pa), s(ps) {}
+
+    int GetA() const { return a; }
+    std::string GetS() const { return s; } 
+};
+
+class X {
+public:
+    X() {};
+    virtual ~X() = default;
+
+    void Put(Msg&& m) {
+        q_.Put(std::move(m));
+    };
+
+    void Run() {
+
+        auto consumer = [this]() {
+            auto m = q_.Get();
+            auto& dm = dynamic_cast<DataMsg<M>&>(*m);
+            EXPECT_EQ(dm.GetMsgId(), 42);
+            EXPECT_EQ(dm.GetPayload().GetA(), 12);
+            EXPECT_STREQ(dm.GetPayload().GetS().c_str(), "foo");
+        };
+
+        std::thread c(consumer);
+        c.join();
+    }
+
+private:
+    MsgQueue q_;
+};
+
+X x;
+
+x.Put(DataMsg<M>(42, 12, "foo"));
+x.Run();
+
+M m(12, "foo");
+x.Put(DataMsg<M>(42, m));
+x.Run();
+
+}
