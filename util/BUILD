@@ -37,6 +37,17 @@ cc_library(
     ]
 )
 
+cc_library(
+    name = 'filter',
+    srcs = [
+        'bloom.cpp',
+        'filter_policy.cpp',
+    ],
+    deps = [
+        '//components/util:hash',
+    ]
+)
+
 cc_test(
     name = 'coding_test',
     srcs = 'coding_test.cpp',
@@ -92,6 +103,17 @@ cc_test(
     srcs = 'env_posix_test.cpp',
     deps = [
         ':env',
+        '//thirdparty/glog:glog',
+        '//thirdparty/gtest:gtest',
+    ]
+)
+
+cc_test(
+    name = 'bloom_test',
+    srcs = 'bloom_test.cpp',
+    deps = [
+        ':filter',
+        ':coding',
         '//thirdparty/glog:glog',
         '//thirdparty/gtest:gtest',
     ]
