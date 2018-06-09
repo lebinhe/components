@@ -56,6 +56,13 @@ cc_library(
     ]
 )
 
+cc_library(
+    name = 'logging',
+    srcs = 'logging.cpp',
+    deps = [
+    ]
+)
+
 cc_test(
     name = 'coding_test',
     srcs = 'coding_test.cpp',
@@ -132,6 +139,16 @@ cc_test(
     srcs = 'crc32c_test.cpp',
     deps = [
         ':crc32c',
+        '//thirdparty/glog:glog',
+        '//thirdparty/gtest:gtest',
+    ]
+)
+
+cc_test(
+    name = 'logging_test',
+    srcs = 'logging_test.cpp',
+    deps = [
+        ':logging',
         '//thirdparty/glog:glog',
         '//thirdparty/gtest:gtest',
     ]
